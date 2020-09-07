@@ -25,7 +25,7 @@ function Header() {
         <AppBar position="static">
           <Toolbar>
             <Title edge="start" variant="h6">דוח 1</Title>
-            <Typography variant="h6">שלום {name}</Typography>
+            <Typography variant="h6">שלום {user.name}</Typography>
             <IconButton onClick={logout}>
                 <ExitToApp />
             </IconButton>

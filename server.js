@@ -9,6 +9,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const { User } = require('./server/models/user');
 
 // const publicPath = path.join(__dirname, '..', 'public');
 
@@ -30,16 +31,24 @@ passport.use(new LocalStrategy({
         passwordField: 'username',
         passReqToCallback: false
     }, (username, password, done) => {
-        return done(null, username);
+        User.findOne({ key: username }, (err, res) => {
+            if (err) {
+                return done(err);
+            } else {
+                return done(null, res);
+            }
+        });
     }
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.key);
 });
 
-passport.deserializeUser((user, done) => {
-    done(null, user);
+passport.deserializeUser((key, done) => {
+    User.findOne({ key }).exec().then((user) => {
+        done(null, user);
+    });
 });
 
 app.post('/api/login', passport.authenticate('local'), (req, res) => {

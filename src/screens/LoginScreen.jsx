@@ -13,13 +13,13 @@ import styled, { keyframes } from 'styled-components';
 import Axios from 'axios';
 
 function LoginScreen() {
-    const [name, setName] = useState('');
+    const [code, setCode] = useState('');
     const dispatch = useDispatch();
 
     function login() {
         Axios.post('/login', {
-            username: name
-        }).then(() => dispatch(SignIn(name)));
+            username: code
+        }).then((response) => dispatch(SignIn(response)));
     }
 
     return (
@@ -27,12 +27,12 @@ function LoginScreen() {
             <LoginCard>
                 <CardContent>
                 <Typography variant="h5" component="h2">
-                    הכנס את שמך
+                    הזן קוד כניסה
                 </Typography>
                     <TextField
-                        label="שם המשתמש"
+                        label="קוד כניסה"
                         value={name}
-                        onChange={event => setName(event.target.value)} />
+                        onChange={event => setCode(event.target.value)} />
                 </CardContent>
                 <CardActions>
                     <Button onClick={login}>היכנס</Button>

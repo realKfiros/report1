@@ -15,7 +15,7 @@ function MainScreen() {
     const [reply, setReply] = useState([]);
     const socket = io('http://localhost:3001');
 
-    const { name } = useSelector(store => store.user);
+    const { user } = useSelector(store => store.user);
 
     useEffect(() => {
         componentDidMount();
@@ -34,7 +34,7 @@ function MainScreen() {
 
     async function performReply(_reply) {
         socket.emit('reply', {
-            user: name,
+            user: user.key,
             reply: _reply
         });
         setReply(_reply);
