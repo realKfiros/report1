@@ -1,4 +1,3 @@
-require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -13,6 +12,20 @@ const io = require('socket.io')(http);
 const { User } = require('./server/models/user');
 
 const replies = require('./server/routes/replies');
+
+const dev = app.get('env') !== 'production';
+
+if (!dev) {
+    app.disable('x-powered-by');
+    app.use(express.static(path.resolve(__dirname, 'build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    });
+}
+
+if (dev) {
+    require('dotenv').config();
+}
 
 app.use(cors());
 app.use(session({ 
@@ -89,16 +102,6 @@ app.post('/api/logout', (req, res) => {
 });
 
 app.use('/api/replies', replies);
-
-const dev = app.get('env') !== 'production';
-
-if (!dev) {
-    app.disable('x-powered-by');
-    app.use(express.static(path.resolve(__dirname, 'build')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-    });
-}
 
 require('./server/io/replies')(io);
 
