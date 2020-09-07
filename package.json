@@ -30,7 +30,7 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "concurrently \"react-scripts start\" \"node server/server.js\"",
     "server": "concurrently \"react-scripts start\" \"cd server && npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
