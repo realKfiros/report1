@@ -9,7 +9,7 @@ import { SignIn } from './redux/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const { name } = useSelector(store => store.user);
+  const { user } = useSelector(store => store.user);
 
   useEffect(() => {
     componentDidMount();
@@ -23,7 +23,7 @@ function App() {
   return (
     <RTL>
       <Header />
-      {name ? <MainScreen /> : <LoginScreen />}
+      {user ? <MainScreen /> : <LoginScreen />}
     </RTL>
   );
 }

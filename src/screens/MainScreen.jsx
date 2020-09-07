@@ -24,7 +24,7 @@ function MainScreen() {
     async function componentDidMount() {
         let request = await Axios('/replies/today', {
             params: {
-                user: name
+                user: user.key
             }
         });
         if (request.data) {

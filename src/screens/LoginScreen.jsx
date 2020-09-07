@@ -16,10 +16,13 @@ function LoginScreen() {
     const [code, setCode] = useState('');
     const dispatch = useDispatch();
 
-    function login() {
-        Axios.post('/login', {
+    async function login() {
+        await Axios.post('/login', {
             username: code
-        }).then((response) => dispatch(SignIn(response)));
+        });
+        let request = await Axios('/user');
+        console.log(request);
+        dispatch(SignIn(request.data));
     }
 
     return (
@@ -31,8 +34,9 @@ function LoginScreen() {
                 </Typography>
                     <TextField
                         label="קוד כניסה"
-                        value={name}
-                        onChange={event => setCode(event.target.value)} />
+                        value={code}
+                        onChange={event => setCode(event.target.value)}
+                        fullWidth />
                 </CardContent>
                 <CardActions>
                     <Button onClick={login}>היכנס</Button>

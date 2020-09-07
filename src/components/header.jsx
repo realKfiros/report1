@@ -15,13 +15,13 @@ import Axios from 'axios';
 
 function Header() {
     const dispatch = useDispatch();
-    const { name } = useSelector(store => store.user);
+    const { user } = useSelector(store => store.user);
 
     function logout() {
         Axios.post('/logout').then(() => dispatch(SignOut()));
     }
 
-    return name ? (
+    return user ? (
         <AppBar position="static">
           <Toolbar>
             <Title edge="start" variant="h6">דוח 1</Title>

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -11,12 +12,9 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const { User } = require('./server/models/user');
 
-// const publicPath = path.join(__dirname, '..', 'public');
-
 const replies = require('./server/routes/replies');
 
 app.use(cors());
-// app.use(express.static(publicPath));
 app.use(session({ 
   secret: "bullshit",
   resave: false
@@ -42,19 +40,23 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser((user, done) => {
-    done(null, user.key);
+    done(null, user._id);
 });
 
-passport.deserializeUser((key, done) => {
-    User.findOne({ key }).exec().then((user) => {
-        done(null, user);
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, res) => {
+        if (err) {
+            done(err);
+        } else {
+            done(null, res)
+        }
     });
 });
 
 app.post('/api/login', passport.authenticate('local'), (req, res) => {
     try {
-        req.session.user = req.user;
-        res.sendStatus(200);
+        session.user = req.user;
+        res.status(200).send(req.user);
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -76,12 +78,13 @@ app.get('/api/loggedIn', isAuthenticated, (req, res) => {
 });
 
 app.get('/api/user', (req, res) => {
-    res.send(req.session.user);
+    console.log(session.user);
+    res.send(session.user);
 });
 
 app.post('/api/logout', (req, res) => {
     req.logOut();
-    delete req.session.user;
+    delete session.user;
     res.sendStatus(200);
 });
 
