@@ -10,9 +10,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-const publicPath = path.join(__dirname, '..', 'public');
+// const publicPath = path.join(__dirname, '..', 'public');
 
-const replies = require('./routes/replies');
+const replies = require('./server/routes/replies');
 
 app.use(cors());
 app.use(express.static(publicPath));
@@ -88,7 +88,7 @@ if (!dev) {
     });
 }
 
-require('./io/replies')(io);
+require('./server/io/replies')(io);
 
 http.listen(port, () => {
     console.log(`server listening at http://localhost:${port}`)

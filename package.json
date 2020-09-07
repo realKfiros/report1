@@ -30,13 +30,14 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server.js",
     "heroku-postbuild": "npm install && npm run build",
     "server": "concurrently \"react-scripts start\" \"cd server && npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": "react-app"
   },
