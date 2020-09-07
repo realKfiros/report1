@@ -12,7 +12,7 @@ import Axios from 'axios';
 import io from 'socket.io-client';
 
 function MainScreen() {
-    const [reply, setReply] = useState();
+    const [reply, setReply] = useState([]);
     const socket = io('http://localhost:3001');
 
     const { name } = useSelector(store => store.user);
