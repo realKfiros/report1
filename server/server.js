@@ -9,6 +9,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+
 const publicPath = path.join(__dirname, '..', 'public');
 
 const replies = require('./routes/replies');
@@ -77,9 +78,15 @@ app.post('/api/logout', (req, res) => {
 
 app.use('/api/replies', replies);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
-});
+const dev = app.get('env') !== 'production';
+
+if (!dev) {
+    app.disable('x-powered-by');
+    app.use(express.static(path.resolve(__dirname, 'build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    });
+}
 
 require('./io/replies')(io);
 
