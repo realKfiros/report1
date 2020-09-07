@@ -7,7 +7,7 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SignIn } from '../redux/actions';
 import styled, { keyframes } from 'styled-components';
 import Axios from 'axios';

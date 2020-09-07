@@ -26,7 +26,7 @@ const theme = createMuiTheme({
   },
 });
 
-Axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001';
+Axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'api' : 'http://localhost:3001/api';
 
 ReactDOM.render(
   <React.StrictMode>

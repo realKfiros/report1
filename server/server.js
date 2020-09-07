@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const cors = require('cors');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -41,7 +41,7 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
+app.post('/api/login', passport.authenticate('local'), (req, res) => {
     try {
         req.session.user = req.user;
         res.sendStatus(200);
@@ -61,23 +61,23 @@ let isAuthenticated = (req, res, next) => {
     }
 };
 
-app.get('/loggedIn', isAuthenticated, (req, res) => {
+app.get('/api/loggedIn', isAuthenticated, (req, res) => {
     res.status(200).json(req.user);
 });
 
-app.get('/user', (req, res) => {
+app.get('/api/user', (req, res) => {
     res.send(req.session.user);
 });
 
-app.post('/logout', (req, res) => {
+app.post('/api/logout', (req, res) => {
     req.logOut();
     delete req.session.user;
     res.sendStatus(200);
 });
 
-app.use('/replies', replies);
+app.use('/api/replies', replies);
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
