@@ -15,7 +15,7 @@ const io = require('socket.io')(http);
 const replies = require('./server/routes/replies');
 
 app.use(cors());
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 app.use(session({ 
   secret: "bullshit",
   resave: false
