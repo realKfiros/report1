@@ -9,9 +9,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const { User } = require('./server/models/user');
-
-const replies = require('./server/routes/replies');
 
 const dev = app.get('env') !== 'production';
 
@@ -26,6 +23,10 @@ if (!dev) {
 if (dev) {
     require('dotenv').config();
 }
+
+const { User } = require('./server/models/user');
+
+const replies = require('./server/routes/replies');
 
 app.use(cors());
 app.use(session({ 
