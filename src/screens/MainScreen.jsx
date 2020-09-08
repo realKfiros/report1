@@ -12,7 +12,7 @@ import Axios from 'axios';
 import io from 'socket.io-client';
 
 function MainScreen() {
-    const [reply, setReply] = useState([]);
+    const [reply, setReply] = useState('');
     const socket = io('http://localhost:3001');
 
     const { user } = useSelector(store => store.user);
@@ -42,10 +42,10 @@ function MainScreen() {
 
     return (
         <Grid container spacing={1}>
-            <ReplyButton reply="בבסיס" selected={reply === 1} onClick={() => performReply(1)}/>
-            <ReplyButton reply="בתפקיד חוץ" selected={reply === 2} onClick={() => performReply(2)}/>
-            <ReplyButton reply="ג" selected={reply === 3} onClick={() => performReply(3)}/>
-            <ReplyButton reply="חופש" selected={reply === 4} onClick={() => performReply(4)}/>
+            <ReplyButton reply="בבסיס" selected={reply === 'בבסיס'} onClick={() => performReply('בבסיס')}/>
+            <ReplyButton reply="בתפקיד חוץ" selected={reply === 'בתפקיד חוץ'} onClick={() => performReply('בתפקיד חוץ')}/>
+            <ReplyButton reply="ג" selected={reply === 'ג'} onClick={() => performReply('ג')}/>
+            <ReplyButton reply="חופש" selected={reply === 'חופש'} onClick={() => performReply('חופש')}/>
         </Grid>
     )
 }
