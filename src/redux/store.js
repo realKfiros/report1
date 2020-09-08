@@ -6,7 +6,7 @@ const store = createStore(
     combineReducers({
         user: userReducer
     }),
-    applyMiddleware(logger)
+    process.env.NODE_ENV === 'production' ? undefined : applyMiddleware(logger)
 );
 
 export default store;

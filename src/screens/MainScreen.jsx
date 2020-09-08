@@ -67,12 +67,7 @@ function ReplyButton({ reply, selected, onClick }) {
 const Touchable = styled(ButtonBase)`
     margin: 10px auto;
     flex: 1;
-    @media only screen and (orientation: landscape) {
-        width: calc(50% - 20px);
-    }
-    @media only screen and (orientation: portrait) {
-        width: calc(100% - 20px);
-    }
+    width: calc(100% - 20px);
 `;
 
 const ReplyCard = styled(Card)`
@@ -82,9 +77,6 @@ const ReplyCard = styled(Card)`
 const Item = styled(Grid)`
     text-align: center;
     padding: 50px;
-    @media only screen and (orientation: landscape) {
-        height: calc(50vh - 52px);
-    }
 `;
 
 export { MainScreen };

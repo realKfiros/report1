@@ -92,7 +92,6 @@ app.get('/api/loggedIn', isAuthenticated, (req, res) => {
 });
 
 app.get('/api/user', (req, res) => {
-    console.log(session.user);
     res.send(session.user);
 });
 
