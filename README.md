@@ -1,6 +1,6 @@
 # <div dir="rtl">דו״ח 1</div>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/realKfiros/report1)
-![GitHub forks](https://img.shields.io/github/forks/realKfiros/report1?label=Fork%20me&style=for-the-badge)
+[![GitHub forks](https://img.shields.io/github/forks/realKfiros/report1?label=Fork%20me&style=for-the-badge)](https://github.com/realKfiros/report1)
 <p dir="rtl">
   מערכת לדיווח מצב יומי קבוצתי.<br />
   נלקחה השראה מהאפליקציה הצה״לית אך אין לקשר בין שני הדברים. למערכת דו״ח 1 הזו ניתן להשתמש לדברים נוספים רבים שלא קשורים לצבא.<br />
