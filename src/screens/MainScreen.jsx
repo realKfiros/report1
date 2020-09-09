@@ -12,6 +12,7 @@ import Axios from 'axios';
 import io from 'socket.io-client';
 
 function MainScreen() {
+    const [replyTypes, setReplyTypes] = useState([]);
     const [reply, setReply] = useState('');
     const socket = io('http://localhost:3001');
 
@@ -22,6 +23,22 @@ function MainScreen() {
     }, []);
 
     async function componentDidMount() {
+        await getReplyTypes();
+        await getReplyToday();
+    }
+
+    async function getReplyTypes() {
+        let request = await Axios('/replies/types', {
+            params: {
+                user: user.key
+            }
+        });
+        if (request.data) {
+            setReplyTypes(request.data);
+        }
+    }
+
+    async function getReplyToday() {
         let request = await Axios('/replies/today', {
             params: {
                 user: user.key
@@ -42,10 +59,7 @@ function MainScreen() {
 
     return (
         <Grid container spacing={1}>
-            <ReplyButton reply="בבסיס" selected={reply === 'בבסיס'} onClick={() => performReply('בבסיס')}/>
-            <ReplyButton reply="בתפקיד חוץ" selected={reply === 'בתפקיד חוץ'} onClick={() => performReply('בתפקיד חוץ')}/>
-            <ReplyButton reply="ג" selected={reply === 'ג'} onClick={() => performReply('ג')}/>
-            <ReplyButton reply="חופש" selected={reply === 'חופש'} onClick={() => performReply('חופש')}/>
+            {replyTypes.map(type => <ReplyButton reply={type} selected={reply === type.reply} onClick={() => performReply(type.reply)}/>)}
         </Grid>
     )
 }
@@ -56,7 +70,7 @@ function ReplyButton({ reply, selected, onClick }) {
             <Touchable onClick={onClick}>
                 <ReplyCard style={{ backgroundColor: selected ? '#eeeeee' : '#ffffff' }}>
                     <CardContent>
-                        <Typography variant="h4">{reply}</Typography>
+                        <Typography variant="h4">{reply.reply}</Typography>
                     </CardContent>
                 </ReplyCard>
             </Touchable>
