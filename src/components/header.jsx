@@ -6,14 +6,14 @@ import {
     IconButton
 } from '@material-ui/core';
 import {
-    ExitToApp
+    ExitToApp, Menu
 } from '@material-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { SignOut } from '../redux/actions';
 import styled from 'styled-components';
 import Axios from 'axios';
 
-function Header() {
+function Header({ openDrawer }) {
     const dispatch = useDispatch();
     const { user } = useSelector(store => store.user);
 
@@ -24,7 +24,10 @@ function Header() {
     return user ? (
         <AppBar position="static">
           <Toolbar>
-            <Title edge="start" variant="h6">דוח 1</Title>
+            <IconButton edge="start" onClick={openDrawer}>
+                <Menu />
+            </IconButton>
+            <Title variant="h6">דוח 1</Title>
             <Typography variant="h6">שלום {user.name}</Typography>
             <IconButton onClick={logout}>
                 <ExitToApp />
