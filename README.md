@@ -19,6 +19,10 @@
 DB_URL=<your MongoDB url>
 ```
 
-# <div dir="rtl">לאיזור האדמין:</div> [report1-admin](https://github.com/realKfiros/report1-admin)
+## <div dir="rtl"><a href="https://github.com/realKfiros/report1-admin">לאיזור האדמין</a></div>
 
-### <div dir="rtl">הצעות לפיצ׳רים, תיקוני באגים וכו׳ יתקבלו בברכה ב-issues</div>
+#### <div dir="rtl">הצעות לפיצ׳רים, תיקוני באגים וכו׳ יתקבלו בברכה ב-issues</div>
+
+## License
+
+MIT
